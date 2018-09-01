@@ -414,6 +414,7 @@ class EDD_Blockonomics
         if($urls_count == '2')
         {
           $message = __("Seems that you have set multiple xPubs or you already have a Callback URL set. <a href='https://blockonomics.freshdesk.com/support/solutions/articles/33000209399-merchants-integrating-multiple-websites' target='_blank'>Here is a guide</a> to setup multiple websites.", 'edd-blockonomics');
+          header("Content-Type: application/text");
           exit($message);
         }
 
@@ -422,11 +423,13 @@ class EDD_Blockonomics
         if($setup_errors)
         {
           $message = __($setup_errors . '</p><p>For more information, please consult <a href="https://blockonomics.freshdesk.com/support/solutions/articles/33000215104-troubleshooting-unable-to-generate-new-address" target="_blank">this troubleshooting article</a></p>', 'edd-blockonomics');
+          header("Content-Type: application/text");
           exit($message);
         }
         else
         {
           $message = __('Congrats ! Setup is all done', 'edd-blockonomics');
+          header("Content-Type: application/text");
           exit($message);
         }
       }
@@ -449,7 +452,7 @@ class EDD_Blockonomics
       error_log(print_r($order, true));
       error_log(edd_get_success_page_uri());
       wp_redirect(edd_get_success_page_uri());
-      exit();
+      exit;
     }
 
     $address = isset($_REQUEST['get_order']) ? $_REQUEST['get_order'] : "";
@@ -459,6 +462,7 @@ class EDD_Blockonomics
     if ($address) 
     {
       error_log('Get Order.');
+      header("Content-Type: application/json");
       exit(json_encode($orders[$address]));
     }
 
