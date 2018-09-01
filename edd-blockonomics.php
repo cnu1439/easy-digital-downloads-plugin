@@ -512,7 +512,7 @@ class EDD_Blockonomics
               }
 
               edd_insert_payment_note(__('Payment completed', 'edd-blockonomics'));
-              edd_set_payment_transaction_id( $payment_id, $order['txid']);
+              edd_set_payment_transaction_id( $order_id, $_REQUEST['txid']);
               edd_update_payment_status($order_id, 'publish' );
             }
           }
@@ -529,7 +529,7 @@ class EDD_Blockonomics
             update_post_meta($order_id, 'expected_btc_amount', $order['satoshi']/1.0e8);
           }
 
-          edd_update_option('blockonomics_orders', $orders);
+          edd_update_option('edd_blockonomics_orders', $orders);
         }
       }
     } 
